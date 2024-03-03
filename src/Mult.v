@@ -11,22 +11,18 @@ PARAMETERS    : m(width of a and b)
 
 Description   : Parameterized sequential multiplier 
 */
-module Mult #(parameter m = 12) (/*AUTOARG*/
-   // Outputs
-   mult, update,
-   // Inputs
-   a, b, clk
-   ) ;
-   input  [m-1:0] a, b;
-   input	  clk;
-   output reg [2*m-1:0]	mult;
-   output reg           update;
-   reg [$clog2(m):0]	cnt;
-   reg [2*m:0]	pA;
-   //reg [m:0]		sum;
-   //reg [2*m:0]	TEMP;
-   
-   
+module Mult #(parameter m = 12) 
+ (
+  // Outputs
+  input [m-1:0]        a, b,
+  input                clk,
+  // Inputs
+  output reg [2*m-1:0] mult,
+  output reg           update
+  ) ;
+    reg [$clog2(m):0]  cnt;
+    reg [2*m:0]        pA;
+    
    localparam		s0 = 2'b00, //DATA LOAD
 			s1 = 2'b01, //SEQUENTIAL ADDITION
 			s2 = 2'b10, //DATA OUT

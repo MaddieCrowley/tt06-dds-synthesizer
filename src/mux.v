@@ -15,22 +15,23 @@ module mux
      input [m-1:0]      sine,
      input [m-1:0]      saw,
      input [m-1:0]      pulse,
-     input [m-1:0]      traing,
-     input [m-1:0]      noi,
+     input [m-1:0]      traingle,
+     input [m-1:0]      noise,
      input [m-1:0]      pwm,
-     input [2:0]        sel,
-     output reg [m-1:0] wave
+     input [2:0]        wave_select,
+     output reg [m-1:0] wave_out
      );
+    
     always @(*)
       begin
-          case(sel)
-            3'b000:wave=sine;
-            3'b001:wave=saw;
-            3'b010:wave=pulse;
-            3'b011:wave=traing;
-            3'b100:wave=noi;
-	        3'b101:wave=pwm;
-            default:wave=sine;
+          case(wave_select)
+            3'b000: wave_out = sine;
+            3'b001: wave_out = saw;
+            3'b010: wave_out = pulse;
+            3'b011: wave_out = traingle;
+            3'b100: wave_out = noise;
+	        3'b101: wave_out = pwm;
+            default: wave_out = sine;
           endcase
       end
     

@@ -10,7 +10,7 @@
  OUTPUTS: Waveform post mux
  PARAMETERS: n (Phase Reg Width)
  m (Waveform width)
- tune (tuning word width)
+ TUNE_WIDTH (tuning word width)
 
 
  */
@@ -19,20 +19,20 @@ module Osc
   #(
     parameter n = 14,
     parameter m = 12,
-    parameter tune = 16
+    parameter TUNE_WIDTH = 16
     )
     //IO INSTATIATION
     (
      input wire            clk,
-     input wire [tune-1:0] tuningW,
-     input wire [2:0]      sel,
+     input wire [TUNE_WIDTH-1:0] tuning_word,
+     input wire [2:0]      wave_select,
      input wire            CE,
-     input wire [m-1:0]    mod,
-     output wire [m-1:0]   OUT	  
+     input wire [m-1:0]    modulation,
+     output wire [m-1:0]   wave_out
      );
     
     wire [n-1:0]           phase;
-    wire [m-1:0]           triang;
+    wire [m-1:0]           triangle;
     wire [m-1:0]           pulse;
     wire [m-1:0]           saw;
     wire [m-1:0]           sine;
@@ -43,25 +43,26 @@ module Osc
       #(
         .n(23),
         .m(n),
-        .tune(tune)
+        .TUNE_WIDTH(TUNE_WIDTH)
         )
     PA
       (
        .ce(CE),
        .clk(clk),
-       .tuning(tuningW),
+       .tuning_word(tuning_word),
        .phaseReg(phase)
        );
     //TRIANGLE WAVEFORM
     Tri                    
-                           #(
-                             .n(n),
-                             .m(m)
-                             )
-    TRI                    (
-                            .phase(phase),
-                            .triang(triang)
-                            );
+      #(
+        .n(n),
+        .m(m)
+        )
+    TRI  
+      (
+       .phase(phase),
+       .triang(triangle)
+       );
     
     //PULSE WAVEFORM
     Pulse
@@ -119,7 +120,7 @@ module Osc
       (
        .clk(clk),
        .phase(phase),
-       .mod(mod),
+       .modulation(modulation),
        .pwm(pwm)
        );
 
@@ -133,10 +134,10 @@ module Osc
        .sine(sine),
        .saw(saw),
        .pulse(pulse),
-       .traing(triang),
-       .noi(lfsr),
+       .traingle(triangle),
+       .noise(lfsr),
        .pwm(pwm),
-       .sel(sel),
-       .wave(OUT)
+       .wave_select(wave_select),
+       .wave_out(wave_out)
        );
 endmodule

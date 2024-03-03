@@ -4,4 +4,14 @@ MADELINE:       WORK ON FILTER MATH
                 Work on phase accuumulator bits for slowing down main clock (set up violations)
                 Try SystemVerilog files (replace muxs with sv parameterized mux)
                 
+<<<<<<< HEAD
 ZACH:           Investigate synthesis sizing of mux.v w & w/o default case.
+=======
+ZACH:           "diagrams"
+
+TODO:
+
+* Investigate synthesis sizing of mux.v w & w/o default case.
+* Actually label the modulations avalable in Mod.v
+* Label m/n port names better
+>>>>>>> 7a1072d (Consistent signal names)

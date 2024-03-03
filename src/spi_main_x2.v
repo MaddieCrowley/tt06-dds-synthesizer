@@ -15,14 +15,14 @@
  *   WORD_WIDTH - The number of bits wide to set the input shift register
  * 
  * INPUTS:
- *   sys_clk     - system clock. Data is processed on the rising edge
- *   load        - Set high to setart a shift cycle. On rising edge of sys_clk,
- *                 the value of parallel_in is loaded.
- *   speed_sel   - LOW sets to shift at full system clock speed.
- *                 HIGH shifts at half system clock speed
- *   parallel_in - The dataword to shift
- *   power_state - The power state for the DAC8411 digital to analog 
- *                 converter
+ *   sys_clk      - system clock. Data is processed on the rising edge
+ *   load         - Set high to setart a shift cycle. On rising edge of sys_clk,
+ *                  the value of parallel_in is loaded.
+ *   speed_select - LOW sets to shift at full system clock speed.
+ *                  HIGH shifts at half system clock speed
+ *   parallel_in  - The dataword to shift
+ *   power_state  - The power state for the DAC8411 digital to analog 
+ *                  converter
  * 
  * OUTPUTS:
  *   sclk - SPI clock, data is intended to be sampled on the falling edge
@@ -35,7 +35,7 @@ module spi_main_x2
     parameter WORD_WIDTH = 16
     )
     (
-     input                  sys_clk, load, speed_sel,
+     input                  sys_clk, load, speed_select,
      input [WORD_WIDTH-1:0] parallel_in,
      input [1:0]            power_state,
      output                 sclk, mosi, csb
@@ -55,7 +55,7 @@ module spi_main_x2
     assign shift_done = shift_count[SR_COUNT_WIDTH];
     assign csb = shift_done;
     assign mosi = shift_reg[SR_WIDTH-1];
-    assign sclk = speed_sel ? ss : ((~sys_clk) | shift_done);
+    assign sclk = speed_select ? ss : ((~sys_clk) | shift_done);
 
     // Sim
     initial shift_count = SR_COUNT_RESET;
@@ -65,7 +65,7 @@ module spi_main_x2
         // Next value load and reset of shift counter
         if (shift_done) begin
             if (load) begin
-                if (speed_sel) begin
+                if (speed_select) begin
                     ss <= 1'b1;
                 end
                 shift_count <= SR_COUNT_INIT;
@@ -76,7 +76,7 @@ module spi_main_x2
         else if (!ss) begin
             shift_count <= shift_count + {{(SR_COUNT_WIDTH-1){1'b0}}, {1'b1}};
             shift_reg <= {shift_reg[SR_WIDTH-2:0], 1'b0};
-            if (speed_sel) begin
+            if (speed_select) begin
                 ss <= 1'b1;
             end
         end

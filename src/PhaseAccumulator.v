@@ -27,19 +27,21 @@ module PhaseAccumulator
   #(
     parameter n = 23,
     parameter m = 14,
-    parameter tune = 16
+    parameter TUNE_WIDTH = 16
     )
     (
-     input [tune-1:0]    tuning,
+     input [TUNE_WIDTH-1:0]    tuning_word,
      input               clk,
-     output wire [m-1:0] phaseReg,
-     input wire          ce
+     input               ce,
+     output wire [m-1:0] phaseReg
      );
+    
     reg [n-1:0]          phase;
+    
     initial phase = 0;
     always @(posedge clk) 
       begin
-          if (ce) phase <= phase + {{n-tune{1'b0}},tuning};
+          if (ce) phase <= phase + {{n-TUNE_WIDTH{1'b0}},tuning_word};
       end
     assign phaseReg = phase[n-1:n-m];
 endmodule

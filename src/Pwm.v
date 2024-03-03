@@ -4,7 +4,7 @@
  Author        : Liam Crowley
  Created       : Wed Nov  1 09:09:16 2023
  INPUTS        : phase
- mod
+ modulation
  OUTPUTS       : pulse
  PARAMETERS    : n(phase reg width)
  m(waveform width)
@@ -24,11 +24,11 @@ module Pwm
      // Inputs
      input               clk,
      input [n-1:0]       phase,
-     input [m-1:0]       mod
+     input [m-1:0]       modulation
      ) ;
     reg                 pul;
     always @ (posedge clk) begin
-        if(phase[n-1:n-m] < mod) pul <= 1;
+        if(phase[n-1:n-m] < modulation) pul <= 1;
         else pul <= 0;
     end
     assign pwm = {m{pul}};
