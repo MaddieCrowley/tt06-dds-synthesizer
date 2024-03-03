@@ -2,4 +2,4 @@ Reduce Sine lut to 8 points
 
 MADELINE:       WORK ON FILTER MATH
                 Work on phase accuumulator bits for slowing down main clock (set up violations)
-                Try SystemVerilog files
+                Try SystemVerilog files (replace muxs with sv parameterized mux)
