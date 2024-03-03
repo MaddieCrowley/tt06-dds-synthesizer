@@ -21,15 +21,15 @@ module Pwm
     (
      // Outputs
      output wire [m-1:0] pwm,
-     reg                 pul,
      // Inputs
      input               clk,
      input [n-1:0]       phase,
      input [m-1:0]       mod
      ) ;
+    reg                 pul;
     always @ (posedge clk) begin
         if(phase[n-1:n-m] < mod) pul <= 1;
         else pul <= 0;
     end
     assign pwm = {m{pul}};
-endmodule // pwm
+endmodule : Pwm
