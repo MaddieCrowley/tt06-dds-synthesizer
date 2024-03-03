@@ -30,27 +30,27 @@ module cdc_generic
        output wire [W-1:0] d_out
        );
 
-   reg [W-1:0]             cdc_stages [0:STAGES-1];
-   reg [W-1:0]             cdc_input;
+    reg [W-1:0]            cdc_stages [0:STAGES-1];
+    reg [W-1:0]            cdc_input;
 
-   always @(posedge clk_in) begin
-      cdc_input <= d_in;
-   end
+    always @(posedge clk_in) begin
+        cdc_input <= d_in;
+    end
 
-   generate
-      genvar ii;
-      for (ii = 0; ii < STAGES; ii = ii + 1) begin : cdc_stage_expansion
-         always @(posedge clk_out) begin
-            if (ii == 0) begin
-               cdc_stages[ii] <= cdc_input;
+    generate
+        genvar ii;
+        for (ii = 0; ii < STAGES; ii = ii + 1) begin : cdc_stage_expansion
+            always @(posedge clk_out) begin
+                if (ii == 0) begin
+                    cdc_stages[ii] <= cdc_input;
+                end
+                else begin
+                    cdc_stages[ii] <= cdc_stages[ii-1];
+                end
             end
-            else begin
-               cdc_stages[ii] <= cdc_stages[ii-1];
-            end
-         end
-      end
-   endgenerate
+        end
+    endgenerate
 
-   assign d_out = cdc_stages[STAGES-1];
+    assign d_out = cdc_stages[STAGES-1];
 
 endmodule : cdc_generic

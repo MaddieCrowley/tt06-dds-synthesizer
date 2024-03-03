@@ -26,23 +26,23 @@ module lut_rw
     parameter WW = 12,
     parameter DEPTH = 128
     )
-   (
-    input                     clk, we, re,
-    input [$clog2(DEPTH)-1:0] wa, ra,
-    input [WW-1:0]            wd,
-    output reg [WW-1:0]       rd
-    );
+    (
+     input                     clk, we, re,
+     input [$clog2(DEPTH)-1:0] wa, ra,
+     input [WW-1:0]            wd,
+     output reg [WW-1:0]       rd
+     );
 
-   reg [WW-1:0]               q [0:DEPTH-1];
+    reg [WW-1:0]               q [0:DEPTH-1];
 
-   always @(posedge clk) begin
-      if (re) begin
-         rd <= q[ra];
-      end
-      if (we) begin
-         q[wa] <= wd;
-      end
-   end
-   
+    always @(posedge clk) begin
+        if (re) begin
+            rd <= q[ra];
+        end
+        if (we) begin
+            q[wa] <= wd;
+        end
+    end
+    
 endmodule // lut_rw
 
