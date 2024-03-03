@@ -12,7 +12,7 @@
 
 `default_nettype none
 
-module tt_um_electronicstinkerer_dds_collab 
+module tt_um_LiamCrowley_Synthesizer 
   #(
     parameter tuneW = 16, //tuning word width
     parameter waveW = 12, //waveform width
@@ -198,4 +198,4 @@ module tt_um_electronicstinkerer_dds_collab
      );
    
    
-endmodule // tt_um_electronicstinkerer_dds_collab
+endmodule // tt_um_LiamCrowley_Synthesizer

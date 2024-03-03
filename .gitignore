@@ -15,3 +15,8 @@ src/results.xml
 src/user_config.tcl
 *.v.bak
 verible.filelist
+modelsim.ini
+qrun.log
+transcript
+work/*
+src/FILTER/work/*
