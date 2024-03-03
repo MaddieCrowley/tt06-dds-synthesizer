@@ -14,17 +14,18 @@
  Description   : 5 input paramterized mux
  */
 
-module mux_5 #(parameter m = 12)(/*AUTOARG*/
-                                 // Outputs
-                                 out,
-                                 // Inputs
-                                 in0, in1, in2, in3, in4, sel
-                                 ) ;
-    input  [m-1:0] in0, in1, in2, in3, in4;
-    input [2:0]    sel;
-    output [m-1:0] out;
+module mux_5 #(parameter m = 12)
+    (
+     // Outputs
+     output [m-1:0] out; 
+     // Inputs
+     input [m-1:0]  in0, in1, in2, in3, in4;
+     input [2:0]    sel;
+     );
+    
     reg            out;
-    always @ ( /*AUTOSENSE*/in0 or in1 or in2 or in3 or in4 or sel) begin
+    
+    always @ (/*AUTOSENSE*/in0 or in1 or in2 or in3 or in4 or sel) begin
         case (sel) 
 	      3'b000: begin
 	          out = in0;
@@ -43,14 +44,11 @@ module mux_5 #(parameter m = 12)(/*AUTOARG*/
 	      end
 	      /*
 	       * 3'b101: begin
-	       
-	end
+	       * end
 	       */
 	      default: begin
-	          
 	      end
         endcase
-	    
     end
     
 endmodule // mux_5

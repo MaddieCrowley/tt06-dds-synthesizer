@@ -34,4 +34,4 @@ module mux
           endcase
       end
     
-endmodule
+endmodule // mux

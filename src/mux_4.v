@@ -17,15 +17,15 @@ module mux_4
   #(
     parameter m = 12
     )
-    (/*AUTOARG*/
+    (
      // Outputs
-     out,
+     output reg [m-1:0] out;
+
      // Inputs
-     in0, in1, in2, in3, sel
-     ) ;
-    input [m-1:0] in0, in1, in2, in3;
-    output reg [m-1:0] out;
-    input [1:0]        sel;
+     input [m-1:0]      in0, in1, in2, in3;
+     input [1:0]        sel;
+     );
+    
     always @ (*) begin
         case (sel) 
 	      2'b00: begin
@@ -47,4 +47,4 @@ module mux_4
 	    
     end
     
-endmodule // O_mux
+endmodule // mux_4

@@ -18,17 +18,15 @@ module Pwm
     parameter m = 12,
     parameter MAX = 2**n
     )
-    (/*AUTOARG*/
+    (
      // Outputs
-     pwm,
+     output wire [m-1:0] pwm,
+     reg                 pul,
      // Inputs
-     clk, phase, mod
+     input               clk,
+     input [n-1:0]       phase,
+     input [m-1:0]       mod
      ) ;
-    input     clk;
-    input [n-1:0] phase;
-    input [m-1:0] mod;
-    output wire [m-1:0] pwm;
-    reg                 pul;
     always @ (posedge clk) begin
         if(phase[n-1:n-m] < mod) pul <= 1;
         else pul <= 0;

@@ -12,15 +12,15 @@
  Description   : Parameterized 2 input mux
  */
 
-module mux_2 #(parameter m = 12) (/*AUTOARG*/
-                                  // Outputs
-                                  out,
-                                  // Inputs
-                                  in0, in1, sel
-                                  ) ;
-    input  [m-1:0] in0, in1;
-    input          sel;
-    output reg [m-1:0] out; 
+module mux_2 #(parameter m = 12)
+    (
+     // Outputs
+     output reg [m-1:0] out; 
+     // Inputs
+     input [m-1:0]      in0, in1;
+     input              sel;
+     );
+    
     always @ ( /*AUTOSENSE*/in0 or in1 or sel) begin
         case (sel) 
 	      1'b0: begin
@@ -34,4 +34,4 @@ module mux_2 #(parameter m = 12) (/*AUTOARG*/
           end
         endcase	  
     end
-endmodule // 2_mux
+endmodule // mux_2
