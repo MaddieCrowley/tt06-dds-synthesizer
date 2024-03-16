@@ -36,28 +36,36 @@ module Mod #(parameter m = 12,parameter o=16)
        );
     
     always @ ( /*AUTOSENSE*/OSC0 or OSC1 or modulation_select or multO) begin
-        case (modulation_select) 
+        case (modulation_select)
+          // Wave addition (each 50% full scale) = (OSC0 / 2) + (OSC1 / 2)
 	      3'b000: begin
 	          modulation_out = {{1'b0, OSC0[m-1:1]} + {1'b0, OSC1[m-1:1]}, {(o-m){1'b0}}};
 	      end
+          // Wave subtraction (each 50% full scale) = (OSC0 / 2) - (OSC1 / 2)
 	      3'b001: begin
 	          modulation_out = {{1'b0, OSC0[m-1:1]} + {1'b0, ~OSC1[m-1:1]}, {(o-m){1'b1}}};
 	      end
+          // Wave addition (each 100% full scale) = OSC0 + OSC1
 	      3'b010: begin
 	          modulation_out = {(OSC0+OSC1),{(o-m){1'b0}}};
 	      end
+          // Magic wave ????
 	      3'b011: begin
 	          modulation_out = {{(o-1){multO[o-1]}} ^ multO[o-2:0], 1'b0};
 	      end
+          // Just OSC0 (100% full scale) = OSC0
 	      3'b100: begin
 	          modulation_out = {OSC0, {(o-m){1'b1}}};
 	      end
+          // Just OSC1 (100% full scale) = OSC1
 	      3'b101: begin
 	          modulation_out = {OSC1, {(o-m){1'b1}}};
 	      end
+          // Simple wave bitwise XOR (each 100% full scale) = OSC0 XOR OSC1
 	      3'b110: begin
 	          modulation_out = {OSC0,{(o-m){1'b0}}} ^ {OSC1,{(o-m){1'b0}}};
 	      end
+          // Simple wave bitwise AND (each 100% full scale) = OSC0 & OSC1
 	      3'b111: begin
 	          modulation_out = {OSC0,{(o-m){1'b0}}} & {OSC1,{(o-m){1'b0}}};
 	      end

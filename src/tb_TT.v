@@ -22,7 +22,7 @@ module tb_tt ();
     reg [1:0]    dac_power_state;
 
     // Module instantiation
-    tt_um_LiamCrowley_Synthesizer #() tt05
+    tt_um_LiamCrowley_Synthesizer #() tt06
       (
        .ui_in({
                osc0_pw_sel,
