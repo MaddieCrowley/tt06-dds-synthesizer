@@ -21,3 +21,4 @@ qrun.log
 transcript
 work/*
 src/FILTER/work/*
+*.slx.original
