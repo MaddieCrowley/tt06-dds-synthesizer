@@ -16,7 +16,7 @@ endmodule
 module and_cell (
                  input wire a,
                  input wire b,
-                 ou tput wire out
+                 output wire out
                  );
 
     assign out = a & b;
@@ -25,7 +25,7 @@ endmodule
 module or_cell (
                 input wire a,
                 input wire b,
-                out put wire out
+                output wire out
                 );
 
     assign out = a | b;
@@ -34,7 +34,7 @@ endmodule
 module xor_cell (
                  input wire a,
                  input wire b,
-                 ou tput wire out
+                 output wire out
                  );
 
     assign out = a ^ b;
@@ -43,7 +43,7 @@ endmodule
 module nand_cell (
                   input wire a,
                   input wire b,
-                  o utput wire out
+                  output wire out
                   );
 
     assign out = !(a&b);
@@ -51,7 +51,7 @@ endmodule
 
 module not_cell (
                  input wire in,
-                 ou tput wire out
+                 output wire out
                  );
 
     assign out = !in;
@@ -61,7 +61,7 @@ module mux_cell (
                  input wire a,
                  input wire b,
                  input wire sel,
-                 ou tput wire out
+                 output wire out
                  );
 
     assign out = sel ? b : a;
@@ -71,7 +71,7 @@ module dff_cell (
                  input wire clk,
                  input wire d,
                  output reg q,
-                 out put wire notq
+                 output wire notq
                  );
 
     assign notq = !q;
@@ -86,7 +86,7 @@ module dffsr_cell (
                    input wire s,
                    input wire r,
                    output reg q,
-                   o utput wire notq
+                   output wire notq
                    );
 
     assign notq = !q;
