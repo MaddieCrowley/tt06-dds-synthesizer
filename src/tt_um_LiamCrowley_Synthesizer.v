@@ -162,7 +162,7 @@ module tt_um_LiamCrowley_Synthesizer
     ///////////////////////////
     // MODULATION
     ///////////////////////////
-    mux_2 #( .m(WAVE_WIDTH) ) PULS_MUX
+    mux_2 #( .m(WAVE_WIDTH) ) PULS_MUX2
       (
        .in0(osc1_wave_out),
        .in1(osc0_ext_pulse_width),
@@ -198,4 +198,4 @@ module tt_um_LiamCrowley_Synthesizer
        );
     
     
-endmodule // tt_um_LiamCrowley_Synthesizer
+endmodule : tt_um_LiamCrowley_Synthesizer
